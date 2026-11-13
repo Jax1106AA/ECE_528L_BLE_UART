@@ -350,7 +350,13 @@ The motor controller uses the following commands:
 
 The program reads all five bytes, including the checksum byte, so the checksum cannot be mistaken for the beginning of the next packet. Releasing any directional button immediately calls `Motor\_Stop()`.
 
+# Screenshots
 
+## BLE UART Terminal Output
+
+The terminal output below shows valid and invalid BLE UART commands received from the Bluefruit Connect application.
+
+![BLE UART terminal output](Screenshots/ece528L_lab4_ble_uart_terminal_output.png)
 
 \# Verification Status
 
