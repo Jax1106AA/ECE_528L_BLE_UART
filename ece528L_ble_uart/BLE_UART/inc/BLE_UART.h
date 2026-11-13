@@ -21,8 +21,7 @@
  * @note For more information regarding the Enhanced Universal Serial Communication Interface (eUSCI),
  * refer to the MSP432Pxx Microcontrollers Technical Reference Manual
  *
- * @author
- *
+ * @author Aolany Acosta and Hernan Zapien Robles
  */
 
 #ifndef INC_BLE_UART_H_
@@ -32,6 +31,14 @@
 #include <string.h>
 #include "msp.h"
 #include "Clock.h"
+
+#define BLE_UART_BUFFER_SIZE 128
+#define CR  0x0D
+#define LF  0x0A
+#define BS  0x08
+#define ESC 0x1B
+#define SP  0x20
+#define DEL 0x7F
 
 void BLE_UART_Init();
 
