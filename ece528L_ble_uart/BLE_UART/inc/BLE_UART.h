@@ -52,6 +52,6 @@ void BLE_UART_OutString(char *pt);
 
 uint8_t Check_BLE_UART_Data(char BLE_UART_Data_Buffer[], char *data_string);
 
-void BLE_UART_Reset();
+int BLE_UART_InPacket(char *buffer_pointer, uint16_t buffer_size);
 
 #endif /* INC_BLE_UART_H_ */

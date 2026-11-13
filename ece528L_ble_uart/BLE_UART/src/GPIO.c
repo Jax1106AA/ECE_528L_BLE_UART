@@ -118,9 +118,14 @@ uint8_t PMOD_8LD_Output(uint8_t led_value)
 
 void PMOD_SWT_Init(void)
 {
-    P10->SEL0 &= ~0xF;
-    P10->SEL1 &= ~0xF;
-    P10->DIR &= ~0xF;
+    // Configure P10.0-P10.3 as GPIO inputs
+    P10->SEL0 &= ~0x0F;
+    P10->SEL1 &= ~0x0F;
+    P10->DIR &= ~0x0F;
+
+    // Enable internal resistors and select pull-down operation
+    P10->REN |= 0x0F;
+    P10->OUT &= ~0x0F;
 }
 
 uint8_t Get_PMOD_SWT_Status(void)

@@ -153,7 +153,47 @@ uint8_t Check_BLE_UART_Data(char BLE_UART_Data_Buffer[], char *data_string)
     }
 }
 
+/**
+ * @brief Reads one 5-byte Bluefruit Controller packet.
+ *
+ * Characters are discarded until the packet header '!' is found.
+ * The header and next four bytes are stored in the provided buffer.
+ *
+ * @param buffer_pointer Destination buffer for the packet
+ * @param buffer_size Size of the destination buffer
+ *
+ * @return 5 when a packet is read successfully, otherwise 0
+ */
+int BLE_UART_InPacket(char *buffer_pointer, uint16_t buffer_size)
+{
+    uint8_t character;
+    int index;
 
+    // Five packet bytes plus one null terminator are required
+    if (buffer_size < 6)
+    {
+        return 0;
+    }
+
+    // Discard data until the packet header is received
+    do
+    {
+        character = BLE_UART_InChar();
+    }
+    while (character != '!');
+
+    buffer_pointer[0] = character;
+
+    // Read packet type, button number, state, and checksum
+    for (index = 1; index < 5; index++)
+    {
+        buffer_pointer[index] = BLE_UART_InChar();
+    }
+
+    buffer_pointer[5] = '\0';
+
+    return 5;
+}
 void BLE_UART_Reset()
 {
     // Switch the BLE module to command mode
